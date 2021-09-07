@@ -8,7 +8,9 @@
     "build": "nuxt generate",
     "lint": "eslint -c .eslintrc.json --ext \".ts,.vue\" --ignore-path .gitignore . --fix",
     "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "storybook": "start-storybook -p 6006 -s static",
+    "build-storybook": "build-storybook"
   },
   "description": "Browser-based video editing software.",
   "keywords": [
@@ -28,16 +30,22 @@
     "wavesurfer.js": "^5.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
     "@nuxt/types": "^2.15.7",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-essentials": "^6.3.8",
+    "@storybook/addon-links": "^6.3.8",
+    "@storybook/vue": "^6.3.8",
     "@types/ccapture.js": "^1.1.1",
     "@types/stats": "^0.16.30",
     "@types/three": "^0.130.1",
     "@types/uuid": "^8.3.1",
     "@types/wavesurfer.js": "^5.1.0",
     "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-loader": "^8.2.2",
     "cypress": "^8.3.1",
     "cypress-file-upload": "^5.0.8",
     "eslint": "^7.32.0",
@@ -46,6 +54,7 @@
     "eslint-plugin-prettier-vue": "^3.1.0",
     "eslint-plugin-vue": "^7.15.1",
     "prettier": "^2.3.2",
-    "vue-class-component": "^7.2.6"
+    "vue-class-component": "^7.2.6",
+    "vue-loader": "^15.9.8"
   }
 }
