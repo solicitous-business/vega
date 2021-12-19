@@ -271,6 +271,7 @@ export default class IndexPage extends Vue {
       const res = await axios.get("/static/example/demo.json");
       if (isProject(res.data)) {
         this.project = new Project(res.data);
+        await this.project.load(res.data);
         this.openProject();
       }
     }
@@ -310,6 +311,8 @@ export default class IndexPage extends Vue {
       if (s instanceof VideoStrip && newAsset instanceof VideoAsset) {
         if (s.videoAsset == oldAsset) {
           s.updateAsset(newAsset);
+          this.scene?.add(s.obj);
+          console.log(this.scene);
         }
       } else if (s instanceof ImageStrip && newAsset instanceof ImageAsset) {
         s.updateAsset(newAsset);
@@ -320,6 +323,7 @@ export default class IndexPage extends Vue {
     this.selectedAsset = newAsset;
   }
 
+  // Should replace sync
   changeStripPropery(index: number, name: string, value: any) {
     if (index < 0 || this.project.strips.length <= index) return;
     const target = this.project.strips[index];

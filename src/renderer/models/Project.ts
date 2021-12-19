@@ -36,8 +36,9 @@ export class Project implements IProject {
   height: number;
   fps: number;
   duration: number;
-  assets: Asset[];
-  strips: Strip[];
+  assets: Asset[] = [];
+  strips: Strip[] = [];
+
   constructor(i: IProject) {
     i = migrationProject(i);
     this.version = i.version;
@@ -46,8 +47,12 @@ export class Project implements IProject {
     this.height = i.height;
     this.fps = i.fps;
     this.duration = i.duration;
-    this.assets = AssetUtil.interfacesToInstances(i.assets);
+  }
+
+  async load(i: IProject) {
+    this.assets = await AssetUtil.interfacesToInstances(i.assets);
     this.strips = StripUtil.interfacesToInstances(i.strips, this.assets);
+    console.log(this.assets, this.strips);
   }
 
   toJSON(): IProject {

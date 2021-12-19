@@ -111,11 +111,18 @@ export default class AppBar extends Vue {
         const text = await file.text();
         const iproject = JSON.parse(text);
         if (isProject(iproject)) {
-          this.project = new Project(iproject);
+          const project = new Project(iproject);
+          console.log(iproject.assets);
+          await project.load(iproject);
+          this.project = project;
+          console.log(this.project);
+          this.$forceUpdate();
         } else {
           throw new VegaError("Invalid Project file.");
         }
-      } catch {
+      } catch (err) {
+        console.error(err);
+
         throw new VegaError("Project file is not JSON format.");
       }
     }

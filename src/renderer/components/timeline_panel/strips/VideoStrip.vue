@@ -76,13 +76,15 @@ export default class VideoStripComp extends Vue {
     };
     // zoom depend on dom width
     this.$nextTick(() => {
-      this.wave?.zoom(newScale);
+      // this.wave?.zoom(newScale);
     });
   }
 
   @Watch("strip")
   stripWatch(n: VideoStrip) {
-    this.wave?.load(n.video);
+    console.log("update", n);
+
+    // this.wave?.load(n.video);
   }
 
   updateStrip() {
@@ -96,10 +98,11 @@ export default class VideoStripComp extends Vue {
       waveColor: "#ff9800",
       interact: false,
     });
-
-    this.wave.load(this.strip.video);
+    // if (this.strip.video) this.wave.load(this.strip.video);
 
     this.strip.event.addEventListener("update", this.updateStrip);
+    console.log("add event", this.strip.id);
+
     this.watchViodeOffset();
   }
 

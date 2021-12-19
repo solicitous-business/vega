@@ -276,7 +276,6 @@ export default class TimelinePanel extends Vue {
       length: 5,
       layer: 0,
       position: { x: 0, y: 0, z: 0 },
-      src: "",
       id: "",
       type: "Video",
       assetId: "",
@@ -452,7 +451,7 @@ export default class TimelinePanel extends Vue {
     }
   }
 
-  drop(e: DragEvent) {
+  async drop(e: DragEvent) {
     e.preventDefault();
     const files = e.dataTransfer?.files;
     if (files && files.length == 1) {
@@ -460,6 +459,7 @@ export default class TimelinePanel extends Vue {
       const src = window.URL.createObjectURL(file);
       if (VideoAsset.isSupportType(file.type)) {
         const asset = new VideoAsset(v4(), file.name, src);
+        await asset.init();
         this.$emit("addAsset", asset);
         const newStrip = new VideoStrip(
           {
@@ -467,7 +467,6 @@ export default class TimelinePanel extends Vue {
             length: 5,
             layer: 0,
             position: { x: 0, y: 0, z: 0 },
-            src: "",
             id: "",
             type: "Video",
             assetId: asset.id,

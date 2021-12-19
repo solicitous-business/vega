@@ -87,7 +87,7 @@ export default class AssetInspectorWindow extends Vue {
     return asset;
   }
 
-  change(e: InputEvent) {
+  async change(e: InputEvent) {
     const target = e.target as HTMLInputElement;
     if (target.files && target.files.length == 1) {
       const file = target.files[0];
@@ -101,6 +101,7 @@ export default class AssetInspectorWindow extends Vue {
           throw new VegaError(`Invalid file type ${file.type} to Video.`);
         }
         const newAsset = new VideoAsset(this.asset.id, this.asset.name, path);
+        await newAsset.init();
         this.changeAssetEmit(newAsset);
       } else if (this.asset instanceof ImageAsset) {
         if (!ImageAsset.isSupportType(file.type)) {

@@ -34,7 +34,9 @@ export class StripUtil {
       if (s.type == "Video") {
         const ivs = JSON.parse(JSON.stringify(s)) as IVideoStrip;
         const va = getAssetById(ivs.assetId) as VideoAsset | undefined;
-        return new VideoStrip(ivs, va);
+        const vs = new VideoStrip(ivs, va);
+        vs.updateAsset(va);
+        return vs;
       } else if (s.type == "Audio") {
         const ias = JSON.parse(JSON.stringify(s)) as IVideoStrip;
         const aa = getAssetById(ias.assetId) as AudioAsset | undefined;

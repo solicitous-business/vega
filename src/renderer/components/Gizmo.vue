@@ -110,6 +110,7 @@ export default class Gizmo extends Vue {
       if (!rect) return {};
 
       if (this.strip instanceof VideoStrip) {
+        if (!this.strip.video) return {};
         width = this.strip.video.videoWidth * this.scale;
         height = this.strip.video.videoHeight * this.scale;
         top = py * this.scale - height / 2; // for content-box
